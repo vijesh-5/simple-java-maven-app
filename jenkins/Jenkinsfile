@@ -52,19 +52,28 @@ pipeline{
                 echo "email : ${params.Email}"
             }
 
+        }
+
+        stage('test'){
+            parallel {
+                stage('Test-A'){
+                    steps{
+                        echo "Test - A"
+                    }
+                }
+                stage('Test-B'){
+                    steps{
+                        echo "Test - B"
+                    }
+                }
+            }
+
             post {
                 success {
                     archiveArtifacts artifacts: '**/target/*.jar'
                 }
             }
         }
-
-        // stage('test'){
-        //     steps{
-        //         // echo "Test Stage"
-        //         sh 'mvn'
-        //     }
-        // }
 
         // stage('deploy'){
         //     steps{
