@@ -30,24 +30,37 @@
 pipeline{
 
     agent any
+
+    tools {
+        maven 'test-may15'
+    }
     stages{
 
         stage('build'){
             steps{
-                echo "Build Stage"
+                // echo "Build Stage"
+                sh 'mvn clean package'
+            }
+
+            post {
+                success {
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
             }
         }
 
-        stage('test'){
-            steps{
-                echo "Test Stage"
-            }
-        }
+        // stage('test'){
+        //     steps{
+        //         // echo "Test Stage"
+        //         sh 'mvn'
+        //     }
+        // }
 
-        stage('deploy'){
-            steps{
-                echo "Deploy Stage"
-            }
-        }
+        // stage('deploy'){
+        //     steps{
+        //         echo "Deploy Stage"
+        //     }
+        // }
+
     }
 }
