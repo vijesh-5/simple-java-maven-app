@@ -38,9 +38,9 @@ pipeline{
     environment {
         Name = "Vijesh S"
     }
-    
+
     parameters {
-        string defaultValue: 'wvijesh7@gmail.com', name: 'Email', trim: true
+        string defaultValue: 'wvijesh7@gmail.com', name: 'Email', trim: false
     }
     stages{
 
@@ -48,8 +48,8 @@ pipeline{
             steps{
                 // echo "Build Stage"
                 sh 'mvn clean package'
-                echo 'Build by : $Name'
-                echo 'email : ${params.Email}'
+                echo "Build by : ${env.Name}"
+                echo "email : ${params.Email}"
             }
 
             post {
