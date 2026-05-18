@@ -34,12 +34,22 @@ pipeline{
     tools {
         maven 'test-may15'
     }
+
+    environment {
+        Name = "Vijesh S"
+    }
+    
+    parameters {
+        string defaultValue: 'wvijesh7@gmail.com', name: 'Email', trim: true
+    }
     stages{
 
         stage('build'){
             steps{
                 // echo "Build Stage"
                 sh 'mvn clean package'
+                echo 'Build by : $Name'
+                echo 'email : ${params.Email}'
             }
 
             post {
